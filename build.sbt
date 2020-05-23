@@ -1,3 +1,4 @@
+import de.heikoseeberger.sbtheader.License
 // *****************************************************************************
 // Projects
 // *****************************************************************************
@@ -9,6 +10,7 @@ lazy val `persistent-scan` =
     .settings(commonSettings)
     .settings(
       libraryDependencies ++= Seq(
+        library.akkaStreams,
         library.munit           % Test,
         library.munitScalaCheck % Test,
       ),
@@ -21,10 +23,12 @@ lazy val `persistent-scan` =
 lazy val library =
   new {
     object Version {
+      val akka  = "2.6.5"
       val munit = "0.7.7"
     }
-    val munit           = "org.scalameta"  %% "munit"            % Version.munit
-    val munitScalaCheck = "org.scalameta"  %% "munit-scalacheck" % Version.munit
+    val akkaStreams     = "com.typesafe.akka" %% "akka-stream"      % Version.akka
+    val munit           = "org.scalameta"     %% "munit"            % Version.munit
+    val munitScalaCheck = "org.scalameta"     %% "munit-scalacheck" % Version.munit
   }
 
 // *****************************************************************************
@@ -35,8 +39,9 @@ lazy val commonSettings =
   Seq(
     scalaVersion := "2.13.2",
     organization := "au.com.titanclass",
-    organizationName := "Christopher Hunt ",
+    organizationName := "Titan Class Pty Ltd ",
     startYear := Some(2020),
+    licenses += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation",
